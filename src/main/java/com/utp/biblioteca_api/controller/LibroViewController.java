@@ -49,12 +49,12 @@ public class LibroViewController {
             LibroDTO libroDto = service.buscarLibro(id);
 
             LibroRequestDTO requestDTO = new LibroRequestDTO();
+            requestDTO.setId(libroDto.getId());
             requestDTO.setTitulo(libroDto.getTitulo());
             requestDTO.setAutor(libroDto.getAutor());
             requestDTO.setAnioPublicacion(libroDto.getAnioPublicacion());
 
             model.addAttribute("libro", requestDTO);
-            model.addAttribute("libroId", id);
             model.addAttribute("titulo", "Editar Libro ID: " + id);
             return "registrarLibro";
         } catch (IllegalArgumentException e) {
@@ -63,11 +63,12 @@ public class LibroViewController {
         }
     }
 
+
     @PostMapping("/editar/{id}")
     public String editarLibro(@ModelAttribute LibroRequestDTO request,
                               @PathVariable Long id,
                               RedirectAttributes redirect) {
-        try{
+        try {
             service.editarLibro(id, request);
             redirect.addFlashAttribute("successMessage", "Libro actualizado exitosamente.");
             return "redirect:/vista/libros/listar";
@@ -76,6 +77,7 @@ public class LibroViewController {
             return "redirect:/vista/libros/editar/" + id;
         }
     }
+
 
     @GetMapping("/eliminar/{id}")
     public String eliminarLibro(@PathVariable Long id, RedirectAttributes redirect) {

@@ -47,24 +47,22 @@ public class LibroService {
 
     @Transactional
     public void editarLibro(Long id, LibroRequestDTO request) {
+
         Libro libro = repository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("El libro con id " + id + " no existe."));
 
-        if (request.getAutor() != null) {
-            libro.setAutor(request.getAutor());
-        }
-        if (request.getTitulo() != null) {
-            libro.setTitulo(request.getTitulo());
-        }
+        if (request.getAutor() != null) libro.setAutor(request.getAutor());
+        if (request.getTitulo() != null) libro.setTitulo(request.getTitulo());
+
         if (request.getAnioPublicacion() != null) {
             if (request.getAnioPublicacion().isAfter(Year.now())) {
                 throw new IllegalArgumentException("El año de publicación no puede ser posterior al actual");
             }
             libro.setAnioPublicacion(request.getAnioPublicacion());
         }
-
-        repository.save(libro);
     }
+
+
 
 
     public void eliminarLibro(Long id) {

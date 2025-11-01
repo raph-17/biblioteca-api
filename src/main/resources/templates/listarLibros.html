@@ -31,8 +31,7 @@
                 <td th:text="${libro.autor}">G. García Márquez</td>
                 <td th:text="${libro.anioPublicacion}">1967</td>
                 <td>
-                    <a th:href="@{/vista/libros/editar/{id}(id=${libro.id})}">Editar</a> |
-                    <a th:href="@{/vista/libros/eliminar/{id}(id=${libro.id})}"
+                    <a th:href="@{/vista/libros/editar/{id}(id=${libro.id})}">Editar</a> | <a th:href="@{/vista/libros/eliminar/{id}(id=${libro.id})}"
                        onclick="return confirm('¿Estás seguro de eliminar este libro?');">Eliminar</a>
                 </td>
             </tr>

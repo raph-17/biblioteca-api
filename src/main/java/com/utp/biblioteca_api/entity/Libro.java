@@ -1,5 +1,6 @@
 package com.utp.biblioteca_api.entity;
 
+import com.utp.biblioteca_api.dto.YearAttributeConverter;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -25,6 +26,8 @@ public class Libro {
     private String autor;
 
     @Column(name = "anio_publicacion")
+    @Convert(converter = YearAttributeConverter.class)
     private Year anioPublicacion;
+
 
 }
